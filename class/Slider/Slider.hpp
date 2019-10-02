@@ -1,6 +1,7 @@
 #ifndef SLIDER_HPP
 #define SLIDER_HPP
 
+using namespace std;
 #include <iostream>
 #include <string>
 #include "../../constants.hpp"
