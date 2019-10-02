@@ -45,20 +45,15 @@ Slider::~Slider()
 
 string Slider::toString()
 {
-    
-    string aux = "";
+    string aux = "Zero em <" + to_string(this->xZero) + "," + to_string(this->yZero) + ">\n";
     for (size_t i = 0; i < slidersize; i++)
     {
         for (size_t j = 0; j < slidersize; j++)
         {
             aux += to_string(this->matrix[i][j]) + " ";
         }
-
         aux+="\n";
-        
     }
-
-    aux+= "Zero em <" + to_string(this->xZero) + "," + to_string(this->yZero) + ">\n";
 
     return aux;
 }
@@ -93,7 +88,6 @@ Slider Slider::moveDown()
     newSlider.xZero = xZero-1;
 
     return newSlider;
-    
 }
 
 Slider Slider::moveUp()
@@ -106,7 +100,6 @@ Slider Slider::moveUp()
     newSlider.xZero = xZero+1;
 
     return newSlider;
-    
 }
 
 Slider Slider::moveRight()
@@ -119,7 +112,6 @@ Slider Slider::moveRight()
     newSlider.yZero = yZero-1;
 
     return newSlider;
-    
 }
 
 Slider Slider::moveLeft()
@@ -132,5 +124,4 @@ Slider Slider::moveLeft()
     newSlider.yZero = yZero+1;
 
     return newSlider;
-    
 }

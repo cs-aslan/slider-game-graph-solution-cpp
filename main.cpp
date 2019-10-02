@@ -8,5 +8,5 @@ int main(int argc, char const *argv[])
     Slider a;
     cout << a.toString();
     cout << "\n";
-    cout << a.moveLeft().toString();
+    cout << a.moveDown().toString();
 }
