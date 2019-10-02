@@ -11,4 +11,6 @@ int main(int argc, char const *argv[])
     cout << a.toString();
     cout << "\n";
     cout << a.moveDown().toString();
+
+    return 0;
 }
