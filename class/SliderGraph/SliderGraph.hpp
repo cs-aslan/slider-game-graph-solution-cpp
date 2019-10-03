@@ -21,6 +21,7 @@ public:
     ~SliderGraph();
 
     string toString();
+    string toStringFullTree();
     void createChildren();
 };
 

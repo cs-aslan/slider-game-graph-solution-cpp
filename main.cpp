@@ -8,7 +8,10 @@ using namespace std;
 int main(int argc, char const *argv[])
 {
     SliderGraph a;
-    cout << a.toString();
+
+    a.createChildren();
+
+    cout << a.toStringFullTree();
     
     return 0;
 }

@@ -60,22 +60,22 @@ string Slider::toString()
 
 bool Slider::movableDown()
 {
-    return this->xZero==0;
+    return !(this->xZero==0);
 }
 
 bool Slider::movableUp()
 {
-    return this->xZero==sliderlastelement;
+    return !(this->xZero==sliderlastelement);
 }
 
 bool Slider::movableRight()
 {
-    return this->yZero==0;
+    return !(this->yZero==0);
 }
 
 bool Slider::movableLeft()
 {
-    return this->yZero==sliderlastelement;
+    return !(this->yZero==sliderlastelement);
 }
 
 void Slider::moveDown()

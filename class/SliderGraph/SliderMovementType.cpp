@@ -13,7 +13,7 @@ string SliderMovementTypeToString(SliderMovementType sliderMovementType){
         return "Movido para cima";
 
     case movedDown:
-        return "Movido para cima";
+        return "Movido para baixo";
 
     case movedLeft:
         return "Movido para esquerda";
