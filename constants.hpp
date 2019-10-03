@@ -9,7 +9,8 @@ using namespace std;
 #define sliderlastelement (slidersize-1)
 
 
-#define simpledephtsearchmaxrecursion 50000
+#define dephtsearchmaxrecursion 50000
+#define widhtsearchmaxnodes 300
 
 
 #endif

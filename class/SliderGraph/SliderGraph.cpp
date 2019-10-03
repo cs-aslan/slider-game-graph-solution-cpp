@@ -1,6 +1,7 @@
 using namespace std;
 #include <iostream>
 #include <string>
+#include <queue> 
 
 #include "../Slider/Slider.hpp"
 #include "SliderGraph.hpp"
@@ -43,14 +44,22 @@ string SliderGraph::toString()
 
 string SliderGraph::toStringFullTree()
 {
-    string aux = toString() + "\n";
+    queue<SliderGraph*> _queue;
+    string toBeReturned = "";
 
-    if(this->up != NULL) aux += this->up->toStringFullTree();
-    if(this->down != NULL) aux += this->down->toStringFullTree();
-    if(this->left != NULL) aux += this->left->toStringFullTree();
-    if(this->right != NULL) aux += this->right->toStringFullTree();
+    _queue.push(this);
+    while (!_queue.empty())
+    {
+        if(_queue.front()->up != NULL) _queue.push(_queue.front()->up);
+        if(_queue.front()->down != NULL) _queue.push(_queue.front()->down);
+        if(_queue.front()->left != NULL) _queue.push(_queue.front()->left);
+        if(_queue.front()->right != NULL) _queue.push(_queue.front()->right);
 
-    return aux;
+        toBeReturned += _queue.front()->toString() + '\n';
+        _queue.pop();
+    }
+    
+    return toBeReturned;
 }
 
 void SliderGraph::createChildren()
@@ -101,5 +110,26 @@ void SliderGraph::createChildren()
         this->left->father = this;
 
         this->left->nullfillChildren();
+    }
+}
+
+void SliderGraph::widhtSearch()
+{
+    queue<SliderGraph*> _queue;
+    string toBeReturned = "";
+    int count = 0;
+
+    _queue.push(this);
+    while (!_queue.empty() && count<widhtsearchmaxnodes)
+    {
+        _queue.front()->createChildren();
+
+        if(_queue.front()->up != NULL) _queue.push(_queue.front()->up);
+        if(_queue.front()->down != NULL) _queue.push(_queue.front()->down);
+        if(_queue.front()->left != NULL) _queue.push(_queue.front()->left);
+        if(_queue.front()->right != NULL) _queue.push(_queue.front()->right);
+
+        _queue.pop();
+        count++;
     }
 }

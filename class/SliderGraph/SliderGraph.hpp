@@ -28,6 +28,8 @@ public:
     string toString();
     string toStringFullTree();
     void createChildren();
+
+    void widhtSearch();
 };
 
 #endif

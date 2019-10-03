@@ -9,7 +9,7 @@ int main(int argc, char const *argv[])
 {
     SliderGraph * a = new SliderGraph();
 
-    a->createChildren();
+    a->widhtSearch();
 
     cout << a->toStringFullTree();
 
