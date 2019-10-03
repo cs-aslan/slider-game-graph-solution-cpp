@@ -7,7 +7,7 @@ using namespace std;
 #include "../../constants.hpp"
 #include "../Slider/Slider.hpp"
 
-class SliderGraph
+class SliderGraph : private Slider
 {
 private:
     /* data */
