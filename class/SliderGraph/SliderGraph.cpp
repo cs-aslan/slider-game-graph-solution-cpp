@@ -8,65 +8,94 @@ using namespace std;
 
 SliderGraph::SliderGraph()
 {
-    this->up = NULL;
-    this->down = NULL;
-    this->left = NULL;
-    this->right = NULL;
+    nullfillChildren();
     this->moved = original;
+
+    this->father = NULL;
+    this->level = 0;
 }
 
 SliderGraph::~SliderGraph()
 {
 }
 
+void SliderGraph::nullfillChildren()
+{
+    this->down = NULL;
+    this->up = NULL;
+    this->left = NULL;
+    this->right = NULL;
+}
+
 string SliderGraph::toString()
 {
-    return SliderMovementTypeToString(this->moved) + "\n" + Slider::toString();
+    // cout << this->down << "- down\n";
+    // cout << this->up << "- up\n";
+    // cout << this->left << "- left\n";
+    // cout << this->right << "- right\n";
+
+    return "Nível- " + to_string(this->level) + "\nPai- " + to_string((uintptr_t)this->father) + "\n" + SliderMovementTypeToString(this->moved) + "\n" + Slider::toString();
 }
 
 string SliderGraph::toStringFullTree()
 {
     string aux = toString() + "\n";
 
-    if(this->up != NULL) aux += this->up->toString() + "\n";
-    if(this->down != NULL) aux += this->down->toString() + "\n";
-    if(this->left != NULL) aux += this->left->toString() + "\n";
-    if(this->right != NULL) aux += this->right->toString() + "\n";
+    if(this->up != NULL) aux += this->up->toStringFullTree();
+    if(this->down != NULL) aux += this->down->toStringFullTree();
+    if(this->left != NULL) aux += this->left->toStringFullTree();
+    if(this->right != NULL) aux += this->right->toStringFullTree();
 
     return aux;
 }
 
 void SliderGraph::createChildren()
 {
+    short int childrenLevel = this->level + 1;
+
     if(this->moved != movedUp && Slider::movableDown())
     {
-        this->down = (SliderGraph*) malloc(sizeof(SliderGraph));
-        *(this->down) = (*this);
+        this->down = new SliderGraph(*this);
         this->down->moveDown();
         this->down->moved = movedDown;
+        
+        this->down->level = childrenLevel;
+        this->down->father = this;
     }
 
     if(this->moved != movedDown && Slider::movableUp())
     {
-        this->up = (SliderGraph*) malloc(sizeof(SliderGraph));
-        *(this->up) = (*this);
+        this->up =  new SliderGraph(*this);
         this->up->moveUp();
         this->up->moved = movedUp;
+
+        this->up->level = childrenLevel;
+        this->up->father = this;
+
+        this->up->nullfillChildren();
     }
 
     if(this->moved != movedLeft && Slider::movableRight())
     {
-        this->right = (SliderGraph*) malloc(sizeof(SliderGraph));
-        *(this->right) = (*this);
+        this->right =  new SliderGraph(*this);
         this->right->moveRight();
         this->right->moved = movedRight;
+
+        this->right->level = childrenLevel;
+        this->right->father = this;
+
+        this->right->nullfillChildren();
     }
 
     if(this->moved != movedRight && Slider::movableLeft())
     {
-        this->left = (SliderGraph*) malloc(sizeof(SliderGraph));
-        *(this->left) = (*this);
+        this->left =  new SliderGraph(*this);
         this->left->moveLeft();
         this->left->moved = movedLeft;
+
+        this->left->level = childrenLevel;
+        this->left->father = this;
+
+        this->left->nullfillChildren();
     }
 }

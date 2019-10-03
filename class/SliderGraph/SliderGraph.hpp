@@ -16,6 +16,11 @@ private:
     SliderGraph * left;
     SliderGraph * right;
     SliderMovementType moved;
+
+    short int level;
+    SliderGraph * father;
+    
+    void nullfillChildren();
 public:
     SliderGraph(/* args */);
     ~SliderGraph();
