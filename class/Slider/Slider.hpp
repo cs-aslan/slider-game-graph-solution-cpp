@@ -11,12 +11,7 @@ class Slider
 private:
     short int matrix[slidersize][slidersize];
     short int xZero, yZero;
-public:
-    Slider();
-    ~Slider();
-
-    string toString();
-
+protected:
     bool movableDown();
     bool movableUp();
     bool movableLeft();
@@ -26,6 +21,12 @@ public:
     void moveUp();
     void moveRight();
     void moveLeft();
+public:
+    Slider();
+    ~Slider();
+
+    string toString();
+    bool checkVictory();
 };
 
 #endif

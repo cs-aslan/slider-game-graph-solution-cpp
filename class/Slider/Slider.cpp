@@ -109,3 +109,23 @@ void Slider::moveLeft()
 
     (*this).yZero = yZero+1;
 }
+
+bool Slider::checkVictory()
+{
+    if(this->xZero != sliderlastelement || this->yZero != sliderlastelement) return false;
+
+    for (short int i = 0; i < slidersize; i++)
+    {
+        for (short int j = 0; j < slidersize; j++)
+        {
+            if (i==sliderlastelement && j==sliderlastelement) return true;
+
+            if (this->matrix[i][j] != i*slidersize + j + 1)
+            {
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
