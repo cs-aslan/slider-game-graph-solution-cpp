@@ -16,13 +16,4 @@ public:
     ~SliderGraph();
 };
 
-SliderGraph::SliderGraph(/* args */)
-{
-}
-
-SliderGraph::~SliderGraph()
-{
-}
-
-
 #endif

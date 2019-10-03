@@ -5,3 +5,10 @@ using namespace std;
 #include "../Slider/Slider.hpp"
 #include "SliderGraph.hpp"
 
+SliderGraph::SliderGraph(/* args */)
+{
+}
+
+SliderGraph::~SliderGraph()
+{
+}
