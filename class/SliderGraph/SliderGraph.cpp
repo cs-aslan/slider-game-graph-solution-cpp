@@ -17,6 +17,10 @@ SliderGraph::SliderGraph()
 
 SliderGraph::~SliderGraph()
 {
+    if(this->down != NULL) this->down->~SliderGraph();
+    if(this->up != NULL) this->up->~SliderGraph();
+    if(this->left != NULL) this->left->~SliderGraph();
+    if(this->right != NULL) this->right->~SliderGraph();
 }
 
 void SliderGraph::nullfillChildren()

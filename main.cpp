@@ -7,11 +7,13 @@ using namespace std;
 
 int main(int argc, char const *argv[])
 {
-    SliderGraph a;
+    SliderGraph * a = new SliderGraph();
 
-    a.createChildren();
+    a->createChildren();
 
-    cout << a.toStringFullTree();
+    cout << a->toStringFullTree();
+
+    a->~SliderGraph();
     
     return 0;
 }
