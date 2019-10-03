@@ -6,14 +6,22 @@ using namespace std;
 #include <string>
 #include "../../constants.hpp"
 #include "../Slider/Slider.hpp"
+#include "SliderMovementType.hpp"
 
 class SliderGraph : private Slider
 {
 private:
-    /* data */
+    SliderGraph * up;
+    SliderGraph * down;
+    SliderGraph * left;
+    SliderGraph * right;
+    SliderMovementType moved;
 public:
     SliderGraph(/* args */);
     ~SliderGraph();
+
+    string toString();
+    void createChildren();
 };
 
 #endif

@@ -12,3 +12,12 @@ SliderGraph::SliderGraph(/* args */)
 SliderGraph::~SliderGraph()
 {
 }
+
+string SliderGraph::toString()
+{
+}
+
+void SliderGraph::createChildren()
+{
+
+}
