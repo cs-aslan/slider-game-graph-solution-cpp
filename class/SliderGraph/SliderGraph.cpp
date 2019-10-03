@@ -7,6 +7,7 @@ using namespace std;
 #include "../Slider/Slider.hpp"
 #include "SliderGraph.hpp"
 #include "SliderMovementType.hpp"
+#include "../RadixSet.hpp"
 
 SliderGraph::SliderGraph()
 {
@@ -56,10 +57,18 @@ string SliderGraph::toStringFullTree()
 {
     queue<SliderGraph*> _queue;
     string toBeReturned = "";
+    RadixSet cache;
 
     _queue.push(this);
     while (!_queue.empty())
     {
+        if(cache.contains(_queue.front()->serialize())) {
+            _queue.pop();
+            cout << "Usando cache\n";
+            continue;
+        }
+
+        cache.insert(_queue.front()->serialize());
         if(_queue.front()->up != NULL) _queue.push(_queue.front()->up);
         if(_queue.front()->down != NULL) _queue.push(_queue.front()->down);
         if(_queue.front()->left != NULL) _queue.push(_queue.front()->left);
