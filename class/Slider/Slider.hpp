@@ -28,6 +28,7 @@ public:
 
     string toString();
     bool checkVictory();
+    string serialize();
 };
 
 #endif

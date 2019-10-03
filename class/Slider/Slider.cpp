@@ -147,3 +147,19 @@ bool Slider::checkVictory()
 
     return true;
 }
+
+string Slider::serialize()
+{
+    string toBeReturned = "";
+    for (size_t i = 0; i < slidersize; i++)
+    {
+        for (size_t j = 0; j < slidersize; j++)
+        {
+            toBeReturned += to_string(this->matrix[i][j]);
+        }
+        
+    }
+
+    return toBeReturned;
+    
+}
