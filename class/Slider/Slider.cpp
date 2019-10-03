@@ -1,6 +1,7 @@
 using namespace std;
 #include <iostream>
 #include <string>
+#include <fstream>
 
 #include "Slider.hpp"
 
@@ -37,6 +38,23 @@ Slider::Slider()
         
     }
     
+}
+
+Slider::Slider(string filename)
+{
+    fstream in(inputpath + filename);
+
+    if (!in) {
+    cout << "Erro. Arquivo não encontrado\n";
+    return;
+    }
+
+    for (size_t i = 0; i < slidersize; i++) {
+        for (size_t j = 0; j < slidersize; j++) {
+            in >> this->matrix[i][j];
+            if(this->matrix[i][j]==0) {xZero=i; yZero=j;}
+        }
+    }
 }
 
 Slider::~Slider()

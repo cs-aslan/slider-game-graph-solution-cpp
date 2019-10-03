@@ -2,12 +2,22 @@ using namespace std;
 #include <iostream>
 #include <string>
 #include <queue> 
+#include <stack>
 
 #include "../Slider/Slider.hpp"
 #include "SliderGraph.hpp"
 #include "SliderMovementType.hpp"
 
 SliderGraph::SliderGraph()
+{
+    nullfillChildren();
+    this->moved = original;
+
+    this->father = NULL;
+    this->level = 0;
+}
+
+SliderGraph::SliderGraph(string filename):Slider(filename)
 {
     nullfillChildren();
     this->moved = original;
@@ -113,7 +123,7 @@ void SliderGraph::createChildren()
     }
 }
 
-void SliderGraph::widhtSearch()
+string SliderGraph::widhtSearch()
 {
     queue<SliderGraph*> _queue;
     string toBeReturned = "";
@@ -122,6 +132,11 @@ void SliderGraph::widhtSearch()
     _queue.push(this);
     while (!_queue.empty() && count<widhtsearchmaxnodes)
     {
+        if(_queue.front()->checkVictory())
+        {
+            return _queue.front()->pathToRoot();
+        }
+
         _queue.front()->createChildren();
 
         if(_queue.front()->up != NULL) _queue.push(_queue.front()->up);
@@ -132,4 +147,27 @@ void SliderGraph::widhtSearch()
         _queue.pop();
         count++;
     }
+
+    return "Impossível determinar solução!\n";
+}
+
+string SliderGraph::pathToRoot()
+{
+    SliderGraph * swap = this;
+    stack<SliderMovementType> _stack;
+    string toBeReturned = "";
+
+    while(swap->father!=NULL)
+    {
+        _stack.push(swap->moved);
+        swap = swap->father;
+    }
+
+    while(!_stack.empty())
+    {
+        toBeReturned += SliderMovementTypeToString(_stack.top()) + "\n";
+        _stack.pop();
+    }
+
+    return toBeReturned;
 }

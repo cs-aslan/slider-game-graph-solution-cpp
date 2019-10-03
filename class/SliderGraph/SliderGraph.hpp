@@ -22,14 +22,16 @@ private:
     
     void nullfillChildren();
 public:
-    SliderGraph(/* args */);
+    SliderGraph();
+    SliderGraph(string filename);
     ~SliderGraph();
 
     string toString();
     string toStringFullTree();
     void createChildren();
 
-    void widhtSearch();
+    string widhtSearch();
+    string pathToRoot();
 };
 
 #endif

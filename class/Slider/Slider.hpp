@@ -24,6 +24,7 @@ protected:
 public:
     Slider();
     ~Slider();
+    Slider(string filename);
 
     string toString();
     bool checkVictory();

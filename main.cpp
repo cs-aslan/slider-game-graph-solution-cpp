@@ -7,13 +7,10 @@ using namespace std;
 
 int main(int argc, char const *argv[])
 {
-    SliderGraph * a = new SliderGraph();
+    SliderGraph * a = new SliderGraph("s4.txt");
+    //cout << a->toString() << "\n";
 
-    a->widhtSearch();
-
-    cout << a->toStringFullTree();
-
-    a->~SliderGraph();
+    cout << a->widhtSearch();
     
     return 0;
 }
