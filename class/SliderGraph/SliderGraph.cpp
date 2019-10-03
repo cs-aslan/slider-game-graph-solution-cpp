@@ -64,7 +64,6 @@ string SliderGraph::toStringFullTree()
     {
         if(cache.contains(_queue.front()->serialize())) {
             _queue.pop();
-            cout << "Usando cache\n";
             continue;
         }
 
@@ -165,6 +164,7 @@ string SliderGraph::pathToRoot()
     SliderGraph * swap = this;
     stack<SliderMovementType> _stack;
     string toBeReturned = "";
+    int steps = 0;
 
     while(swap->father!=NULL)
     {
@@ -176,7 +176,8 @@ string SliderGraph::pathToRoot()
     {
         toBeReturned += SliderMovementTypeToString(_stack.top()) + "\n";
         _stack.pop();
+        steps++;
     }
 
-    return toBeReturned;
+    return toBeReturned + "Número de passos foi de: " + to_string(steps) + "\n";
 }
