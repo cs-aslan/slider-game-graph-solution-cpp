@@ -26,9 +26,9 @@ string SliderGraph::toString()
 
 void SliderGraph::createChildren()
 {
-    if(this->moved != movedUp && Slider::movableDown)
+    if(this->moved != movedUp && Slider::movableDown())
     {
         this->down = (SliderGraph*) malloc(sizeof(SliderGraph));
-        *(this->down) = moveDown();   
+        //*(this->down) = moveDown();   
     }
 }
