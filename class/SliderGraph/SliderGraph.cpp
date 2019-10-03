@@ -29,6 +29,7 @@ void SliderGraph::createChildren()
     if(this->moved != movedUp && Slider::movableDown())
     {
         this->down = (SliderGraph*) malloc(sizeof(SliderGraph));
-        //*(this->down) = moveDown();   
+        *(this->down) = (*this);
+        this->down->moveDown();
     }
 }

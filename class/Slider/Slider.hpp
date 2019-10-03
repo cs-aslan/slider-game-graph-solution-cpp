@@ -22,10 +22,10 @@ public:
     bool movableLeft();
     bool movableRight();
 
-    Slider moveDown();
-    Slider moveUp();
-    Slider moveRight();
-    Slider moveLeft();
+    void moveDown();
+    void moveUp();
+    void moveRight();
+    void moveLeft();
 };
 
 #endif

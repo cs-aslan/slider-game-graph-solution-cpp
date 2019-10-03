@@ -78,50 +78,34 @@ bool Slider::movableLeft()
     return this->yZero==sliderlastelement;
 }
 
-Slider Slider::moveDown()
+void Slider::moveDown()
 {
-    Slider newSlider = (*this); // Copy
+    (*this).matrix[xZero][yZero] = (*this).matrix[xZero-1][yZero];
+    (*this).matrix[xZero-1][yZero] = 0;
 
-    newSlider.matrix[xZero][yZero] = newSlider.matrix[xZero-1][yZero];
-    newSlider.matrix[xZero-1][yZero] = 0;
-
-    newSlider.xZero = xZero-1;
-
-    return newSlider;
+    (*this).xZero = xZero-1;
 }
 
-Slider Slider::moveUp()
+void Slider::moveUp()
 {
-    Slider newSlider = (*this); // Copy
+    (*this).matrix[xZero][yZero] = (*this).matrix[xZero+1][yZero];
+    (*this).matrix[xZero+1][yZero] = 0;
 
-    newSlider.matrix[xZero][yZero] = newSlider.matrix[xZero+1][yZero];
-    newSlider.matrix[xZero+1][yZero] = 0;
-
-    newSlider.xZero = xZero+1;
-
-    return newSlider;
+    (*this).xZero = xZero+1;
 }
 
-Slider Slider::moveRight()
+void Slider::moveRight()
 {
-    Slider newSlider = (*this); // Copy
+    (*this).matrix[xZero][yZero] = (*this).matrix[xZero][yZero-1];
+    (*this).matrix[xZero][yZero-1] = 0;
 
-    newSlider.matrix[xZero][yZero] = newSlider.matrix[xZero][yZero-1];
-    newSlider.matrix[xZero][yZero-1] = 0;
-
-    newSlider.yZero = yZero-1;
-
-    return newSlider;
+    (*this).yZero = yZero-1;
 }
 
-Slider Slider::moveLeft()
+void Slider::moveLeft()
 {
-    Slider newSlider = (*this); // Copy
+    (*this).matrix[xZero][yZero] = (*this).matrix[xZero][yZero+1];
+    (*this).matrix[xZero][yZero+1] = 0;
 
-    newSlider.matrix[xZero][yZero] = newSlider.matrix[xZero][yZero+1];
-    newSlider.matrix[xZero][yZero+1] = 0;
-
-    newSlider.yZero = yZero+1;
-
-    return newSlider;
+    (*this).yZero = yZero+1;
 }
