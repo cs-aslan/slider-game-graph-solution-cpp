@@ -8,7 +8,7 @@ WARN=-Wall
 
 CCFLAGS=$(WARN)
 
-SRC= class/Slider/Slider.cpp class/SliderGraph/SliderGraph.cpp
+SRC= class/Slider/Slider.cpp class/SliderGraph/SliderGraph.cpp class/SliderGraph/SliderMovementType.cpp
 
 all:
 	$(CCO) -o $(TARGET) $(SRC) main.cpp $(CCFLAGS) -lm -O3

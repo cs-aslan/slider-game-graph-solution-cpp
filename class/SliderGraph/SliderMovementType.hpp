@@ -8,7 +8,9 @@ using namespace std;
 #include "../Slider/Slider.hpp"
 
 typedef enum{
-    up, down, left, right
+    movedUp, movedDown, movedLeft, movedRight, original
 } SliderMovementType;
+
+string SliderMovementTypeToString(SliderMovementType sliderMovementType);
 
 #endif

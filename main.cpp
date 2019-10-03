@@ -7,10 +7,8 @@ using namespace std;
 
 int main(int argc, char const *argv[])
 {
-    Slider a;
+    SliderGraph a;
     cout << a.toString();
-    cout << "\n";
-    cout << a.moveDown().toString();
-
+    
     return 0;
 }

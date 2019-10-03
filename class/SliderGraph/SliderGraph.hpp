@@ -18,6 +18,7 @@ private:
     SliderMovementType moved;
 public:
     SliderGraph(/* args */);
+    SliderGraph(Slider slider);
     ~SliderGraph();
 
     string toString();
