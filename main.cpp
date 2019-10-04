@@ -7,7 +7,9 @@ using namespace std;
 
 int main(int argc, char const *argv[])
 {
-    SliderGraph * a = new SliderGraph("s4.txt");
+    SliderGraph * a = new SliderGraph();
+
+    cout << a->toString();
 
     cout << a->widhtSearch();
     

@@ -2,59 +2,51 @@ using namespace std;
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <vector>
 
 #include "Slider.hpp"
 
 Slider::Slider()
 {
-    for (size_t i = 0; i < slidersize; i++)
-    {
-        for (size_t j = 0; j < slidersize; j++)
-        {
-            this->matrix[i][j] = -1;
-        }
-        
-    }
-
     srand (time(NULL));
+    short int movements = rand() % 30 + 20;
+    short int choosedMoviment = rand() % 4;
 
-    short int randX = rand() % slidersize;
-    short int randY = rand() % slidersize;
-    
-    for (size_t i = 0; i < sliderarea; i++)
+    readFromFile("s0.txt");
+
+    for (short int i = 0; i < movements; i++)
     {
-        while (this->matrix[randX][randY]!=-1)
+        switch (choosedMoviment)
         {
-            randX = rand() % slidersize;
-            randY = rand() % slidersize;
+        case 0:
+            if(movableDown()) moveDown();
+            break;
+
+        case 1:
+            if(movableUp()) moveUp();
+            break;
+
+        case 2:
+            if(movableLeft()) moveLeft();
+            break;
+
+        case 3:
+            if(movableRight()) moveRight();
+            break;
+        
+        default:
+            if(movableRight()) moveRight();
+            break;
         }
 
-        this->matrix[randX][randY]=i;
-
-        if(i==0){
-            this->xZero = randX;
-            this->yZero = randY;
-        }        
-        
+        choosedMoviment = rand() % 4;
     }
     
 }
 
 Slider::Slider(string filename)
 {
-    fstream in(inputpath + filename);
-
-    if (!in) {
-    cout << "Erro. Arquivo não encontrado\n";
-    return;
-    }
-
-    for (size_t i = 0; i < slidersize; i++) {
-        for (size_t j = 0; j < slidersize; j++) {
-            in >> this->matrix[i][j];
-            if(this->matrix[i][j]==0) {xZero=i; yZero=j;}
-        }
-    }
+    readFromFile(filename);
 }
 
 Slider::~Slider()
@@ -162,4 +154,52 @@ string Slider::serialize()
 
     return toBeReturned;
     
+}
+
+vector<short int> Slider::toVectorWithoutZero()
+{
+    vector<short int> _vector;
+
+    for (size_t i = 0; i < slidersize; i++)
+    {
+        for (size_t j = 0; j < slidersize; j++)
+        {
+            _vector.push_back(this->matrix[i][j]);
+        }
+        
+    }
+
+    return _vector;
+}
+
+bool Slider::isSolvable()
+{
+    vector<short int> _vector = toVectorWithoutZero();
+
+    int inv_count = 0; 
+    for (int i = 0; i < sliderarea - 1; i++) 
+        for (int j = i+1; j < sliderarea; j++) 
+             if (_vector[j] && _vector[i] &&  _vector[i] > _vector[j]) 
+                  inv_count++;
+
+    return inv_count%2 == 0;
+}
+
+bool Slider::readFromFile(string filename)
+{
+    fstream in(inputpath + filename);
+
+    if (!in) {
+    cout << "Erro. Arquivo não encontrado\n";
+    return false;
+    }
+
+    for (size_t i = 0; i < slidersize; i++) {
+        for (size_t j = 0; j < slidersize; j++) {
+            in >> this->matrix[i][j];
+            if(this->matrix[i][j]==0) {xZero=i; yZero=j;}
+        }
+    }
+
+    return true;
 }

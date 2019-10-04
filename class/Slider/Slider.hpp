@@ -4,6 +4,7 @@
 using namespace std;
 #include <iostream>
 #include <string>
+#include <vector>
 #include "../../constants.hpp"
 
 class Slider
@@ -21,6 +22,8 @@ protected:
     void moveUp();
     void moveRight();
     void moveLeft();
+
+    vector<short int> toVectorWithoutZero();
 public:
     Slider();
     ~Slider();
@@ -29,6 +32,8 @@ public:
     string toString();
     bool checkVictory();
     string serialize();
+    bool isSolvable();
+    bool readFromFile(string filename);
 };
 
 #endif

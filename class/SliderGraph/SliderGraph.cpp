@@ -127,21 +127,21 @@ void SliderGraph::createChildren()
 string SliderGraph::widhtSearch()
 {
     queue<SliderGraph*> _queue;
-    string toBeReturned = "";
     int count = 0;
     RadixSet cache;
 
     _queue.push(this);
     while (!_queue.empty() && count<widhtsearchmaxnodes)
     {
-        if(cache.contains(_queue.front()->serialize())) {
+        if(cache.contains(_queue.front()->serialize())) { // Check if sliders is in the tree
+            _queue.front()->~SliderGraph();
             _queue.pop();
             continue;
         }
 
-        cache.insert(_queue.front()->serialize());
+        cache.insert(_queue.front()->serialize()); // Includes in cache tree
         
-        if(_queue.front()->checkVictory())
+        if(_queue.front()->checkVictory()) // Victory condition
         {
             return _queue.front()->pathToRoot();
         }
