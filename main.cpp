@@ -7,11 +7,11 @@ using namespace std;
 
 int main(int argc, char const *argv[])
 {
-    SliderGraph * a = new SliderGraph();
+    SliderGraph * a = new SliderGraph("s1.txt");
 
     cout << a->toString();
 
-    cout << a->widhtSearch();
+    cout << a->DepthSearch();
     
     return 0;
 }

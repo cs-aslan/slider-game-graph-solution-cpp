@@ -182,3 +182,47 @@ string SliderGraph::pathToRoot()
 
     return toBeReturned + "Número de passos foi de " + to_string(steps) + "\n";
 }
+
+void SliderGraph::DepthSearchRecursive(RadixSet & cache, SliderGraph ** bestSolution, int recursions, int minimumPath)
+{
+    int newMinimumPath = minimumPath;
+
+    if(this->level>minimumPath || recursions>dephtsearchmaxrecursion) {
+        return;
+    }
+
+    if(this->checkVictory()) {
+        if((*bestSolution) == NULL) (*bestSolution) = this;
+        
+        if (newMinimumPath>(**bestSolution).level) {
+            newMinimumPath = (**bestSolution).level;
+            (*bestSolution) = this;
+            cout << "** Vitória com " << to_string((**bestSolution).level) << " movimentos\n";
+        }
+        return;
+    }
+    
+    if(cache.contains(this->serialize())) {
+        return;
+    }
+
+    cache.insert(this->serialize());
+    createChildren();
+
+    if(this->down != NULL) this->down->DepthSearchRecursive(cache, bestSolution, (recursions+1), newMinimumPath);
+    if(this->up != NULL) this->up->DepthSearchRecursive(cache, bestSolution, (recursions+1), newMinimumPath);
+    if(this->left != NULL) this->left->DepthSearchRecursive(cache, bestSolution, (recursions+1), newMinimumPath);
+    if(this->right != NULL) this->right->DepthSearchRecursive(cache, bestSolution, (recursions+1), newMinimumPath);
+}
+
+string SliderGraph::DepthSearch()
+{
+    RadixSet cache;
+    SliderGraph* bestSolution = NULL;
+
+    DepthSearchRecursive(cache, &bestSolution, 0, 9999999);
+
+    if(bestSolution==NULL) return "Impossível determinar solução!\n";
+    
+    return bestSolution->pathToRoot();
+}
