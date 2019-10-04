@@ -22,6 +22,11 @@ private:
     SliderGraph * father;
     
     void nullfillChildren();
+    string pathToRoot();
+    void depthSearchRecursive(SliderGraph ** bestSolution, int recursions, int minimumPath);
+    void createChildren();
+    void trimTree();
+    
 public:
     SliderGraph();
     SliderGraph(string filename);
@@ -29,12 +34,10 @@ public:
 
     string toString();
     string toStringFullTree();
-    void createChildren();
+
 
     string widhtSearch();
-    string pathToRoot();
-    void DepthSearchRecursive(SliderGraph ** bestSolution, int recursions, int minimumPath);
-    string DepthSearch();
+    string depthSearch();
 };
 
 #endif

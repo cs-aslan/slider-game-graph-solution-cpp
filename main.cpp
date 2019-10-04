@@ -11,7 +11,7 @@ int main(int argc, char const *argv[])
 
     cout << a->toString();
 
-    cout << a->widhtSearch();
+    cout << a->depthSearch();
     
     return 0;
 }

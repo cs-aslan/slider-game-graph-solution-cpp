@@ -174,7 +174,7 @@ string SliderGraph::pathToRoot()
     return toBeReturned + "Número de passos foi de " + to_string(steps) + "\n";
 }
 
-void SliderGraph::DepthSearchRecursive(SliderGraph ** bestSolution, int recursions, int minimumPath)
+void SliderGraph::depthSearchRecursive(SliderGraph ** bestSolution, int recursions, int minimumPath)
 {
     int newMinimumPath = minimumPath;
 
@@ -195,19 +195,29 @@ void SliderGraph::DepthSearchRecursive(SliderGraph ** bestSolution, int recursio
 
     createChildren();
 
-    if(this->down != NULL) this->down->DepthSearchRecursive(bestSolution, (recursions+1), newMinimumPath);
-    if(this->up != NULL) this->up->DepthSearchRecursive(bestSolution, (recursions+1), newMinimumPath);
-    if(this->left != NULL) this->left->DepthSearchRecursive(bestSolution, (recursions+1), newMinimumPath);
-    if(this->right != NULL) this->right->DepthSearchRecursive(bestSolution, (recursions+1), newMinimumPath);
+    if(this->down != NULL) this->down->depthSearchRecursive(bestSolution, (recursions+1), newMinimumPath);
+    if(this->up != NULL) this->up->depthSearchRecursive(bestSolution, (recursions+1), newMinimumPath);
+    if(this->left != NULL) this->left->depthSearchRecursive(bestSolution, (recursions+1), newMinimumPath);
+    if(this->right != NULL) this->right->depthSearchRecursive(bestSolution, (recursions+1), newMinimumPath);
 }
 
-string SliderGraph::DepthSearch()
+string SliderGraph::depthSearch()
 {
     SliderGraph* bestSolution = NULL;
 
-    DepthSearchRecursive(&bestSolution, 0, 9999999);
+    depthSearchRecursive(&bestSolution, 0, 9999999);
 
     if(bestSolution==NULL) return "Impossível determinar solução!\n";
     
     return bestSolution->pathToRoot();
+}
+
+void SliderGraph::trimTree()
+{
+    this->down->~SliderGraph();
+    this->up->~SliderGraph();
+    this->left->~SliderGraph();
+    this->right->~SliderGraph();
+
+    nullfillChildren();
 }
