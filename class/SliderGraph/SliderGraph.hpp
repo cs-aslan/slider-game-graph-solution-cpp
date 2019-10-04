@@ -8,7 +8,6 @@ using namespace std;
 #include "../../constants.hpp"
 #include "../Slider/Slider.hpp"
 #include "SliderMovementType.hpp"
-#include "../RadixSet.hpp"
 
 class SliderGraph : private Slider
 {
@@ -34,7 +33,7 @@ public:
 
     string widhtSearch();
     string pathToRoot();
-    void DepthSearchRecursive(RadixSet & cache, SliderGraph ** bestSolution, int recursions, int minimumPath);
+    void DepthSearchRecursive(SliderGraph ** bestSolution, int recursions, int minimumPath);
     string DepthSearch();
 };
 

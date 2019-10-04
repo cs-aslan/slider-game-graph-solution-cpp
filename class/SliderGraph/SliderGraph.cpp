@@ -7,7 +7,6 @@ using namespace std;
 #include "../Slider/Slider.hpp"
 #include "SliderGraph.hpp"
 #include "SliderMovementType.hpp"
-#include "../RadixSet.hpp"
 
 SliderGraph::SliderGraph()
 {
@@ -128,19 +127,11 @@ string SliderGraph::widhtSearch()
 {
     queue<SliderGraph*> _queue;
     int count = 0;
-    RadixSet cache;
 
     _queue.push(this);
     while (!_queue.empty() && count<widhtsearchmaxnodes)
     {
-        if(cache.contains(_queue.front()->serialize())) { // Check if sliders is in the tree
-            _queue.front()->~SliderGraph();
-            _queue.pop();
-            continue;
-        }
 
-        cache.insert(_queue.front()->serialize()); // Includes in cache tree
-        
         if(_queue.front()->checkVictory()) // Victory condition
         {
             return _queue.front()->pathToRoot();
@@ -183,7 +174,7 @@ string SliderGraph::pathToRoot()
     return toBeReturned + "Número de passos foi de " + to_string(steps) + "\n";
 }
 
-void SliderGraph::DepthSearchRecursive(RadixSet & cache, SliderGraph ** bestSolution, int recursions, int minimumPath)
+void SliderGraph::DepthSearchRecursive(SliderGraph ** bestSolution, int recursions, int minimumPath)
 {
     int newMinimumPath = minimumPath;
 
@@ -194,33 +185,27 @@ void SliderGraph::DepthSearchRecursive(RadixSet & cache, SliderGraph ** bestSolu
     if(this->checkVictory()) {
         if((*bestSolution) == NULL) (*bestSolution) = this;
         
-        if (newMinimumPath>(**bestSolution).level) {
+        if (this->level<(**bestSolution).level) {
             newMinimumPath = (**bestSolution).level;
             (*bestSolution) = this;
             cout << "** Vitória com " << to_string((**bestSolution).level) << " movimentos\n";
         }
         return;
     }
-    
-    if(cache.contains(this->serialize())) {
-        return;
-    }
 
-    cache.insert(this->serialize());
     createChildren();
 
-    if(this->down != NULL) this->down->DepthSearchRecursive(cache, bestSolution, (recursions+1), newMinimumPath);
-    if(this->up != NULL) this->up->DepthSearchRecursive(cache, bestSolution, (recursions+1), newMinimumPath);
-    if(this->left != NULL) this->left->DepthSearchRecursive(cache, bestSolution, (recursions+1), newMinimumPath);
-    if(this->right != NULL) this->right->DepthSearchRecursive(cache, bestSolution, (recursions+1), newMinimumPath);
+    if(this->down != NULL) this->down->DepthSearchRecursive(bestSolution, (recursions+1), newMinimumPath);
+    if(this->up != NULL) this->up->DepthSearchRecursive(bestSolution, (recursions+1), newMinimumPath);
+    if(this->left != NULL) this->left->DepthSearchRecursive(bestSolution, (recursions+1), newMinimumPath);
+    if(this->right != NULL) this->right->DepthSearchRecursive(bestSolution, (recursions+1), newMinimumPath);
 }
 
 string SliderGraph::DepthSearch()
 {
-    RadixSet cache;
     SliderGraph* bestSolution = NULL;
 
-    DepthSearchRecursive(cache, &bestSolution, 0, 9999999);
+    DepthSearchRecursive(&bestSolution, 0, 9999999);
 
     if(bestSolution==NULL) return "Impossível determinar solução!\n";
     
