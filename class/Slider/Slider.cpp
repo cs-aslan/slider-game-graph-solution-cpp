@@ -55,7 +55,7 @@ Slider::~Slider()
 
 string Slider::toString()
 {
-    string aux = "Zero em <" + to_string(this->xZero) + "," + to_string(this->yZero) + ">\n";
+    string aux="";
     for (size_t i = 0; i < slidersize; i++)
     {
         for (size_t j = 0; j < slidersize; j++)

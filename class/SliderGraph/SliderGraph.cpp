@@ -49,7 +49,7 @@ string SliderGraph::toString()
     // cout << this->left << "- left\n";
     // cout << this->right << "- right\n";
 
-    return "Nível- " + to_string(this->level) + "\nPai- " + to_string((uintptr_t)this->father) + "\n" + SliderMovementTypeToString(this->moved) + "\n" + Slider::toString();
+    return Slider::toString();
 }
 
 string SliderGraph::toStringFullTree()
@@ -214,10 +214,15 @@ string SliderGraph::depthSearch()
 
 void SliderGraph::trimTree()
 {
-    this->down->~SliderGraph();
-    this->up->~SliderGraph();
-    this->left->~SliderGraph();
-    this->right->~SliderGraph();
+    if(this->down != NULL) this->down->~SliderGraph();
+    if(this->up != NULL) this->up->~SliderGraph();
+    if(this->left != NULL) this->left->~SliderGraph();
+    if(this->right != NULL) this->right->~SliderGraph();
 
     nullfillChildren();
+}
+
+bool SliderGraph::isSolvable()
+{
+    return Slider::isSolvable();
 }

@@ -11,7 +11,7 @@ CCFLAGS=$(WARN)
 SRC= class/Slider/Slider.cpp class/SliderGraph/SliderGraph.cpp class/SliderGraph/SliderMovementType.cpp
 
 all:
-	$(CCO) -o $(TARGET) $(SRC) main.cpp $(CCFLAGS) -lm -O3
+	$(CCO) -o $(TARGET) $(SRC) Main.cpp $(CCFLAGS) -lm -O3
 
 debug:
 	$(CCO) -o $(TARGET) $(SRC) $(CCFLAGS) -lm -DDEBUG=1 -O3

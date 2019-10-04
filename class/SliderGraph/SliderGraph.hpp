@@ -25,17 +25,17 @@ private:
     string pathToRoot();
     void depthSearchRecursive(SliderGraph ** bestSolution, int recursions, int minimumPath);
     void createChildren();
-    void trimTree();
     
 public:
     SliderGraph();
     SliderGraph(string filename);
     ~SliderGraph();
+    void trimTree();
 
     string toString();
     string toStringFullTree();
 
-
+    bool isSolvable();
     string widhtSearch();
     string depthSearch();
 };
