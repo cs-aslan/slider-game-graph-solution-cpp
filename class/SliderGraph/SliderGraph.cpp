@@ -180,5 +180,5 @@ string SliderGraph::pathToRoot()
         steps++;
     }
 
-    return toBeReturned + "Número de passos foi de: " + to_string(steps) + "\n";
+    return toBeReturned + "Número de passos foi de " + to_string(steps) + "\n";
 }
