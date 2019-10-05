@@ -92,12 +92,11 @@ int main(int argc, char const *argv[])
         {
 
             cout << "Obrigado!!\n";
-            break;
+            return 0;
 
         }
-
-        if(option!=0) reShowMenu();
     }
     
+    return 0;
     
 }
