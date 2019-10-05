@@ -3,7 +3,7 @@
 
 using namespace std;
 
-#define inputpath "././input/"
+#define inputpath "././input3x3/"
 
 #define slidersize 3
 #define sliderarea (slidersize*slidersize)

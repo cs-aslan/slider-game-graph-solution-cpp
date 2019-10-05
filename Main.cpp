@@ -57,7 +57,7 @@ int main(int argc, char const *argv[])
         
         else if (option==3) 
         {
-            cout << "Digite o nome do arquivo. Ele deve estar na pasta input\n";
+            cout << "Digite o nome do arquivo. Ele deve estar na pasta input correta!\n";
 
             cin >> filename;
             _sliderGraph = new SliderGraph(filename);
