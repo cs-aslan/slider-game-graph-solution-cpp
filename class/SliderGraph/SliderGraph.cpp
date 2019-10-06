@@ -148,7 +148,7 @@ string SliderGraph::widhtSearch()
         count++;
     }
 
-    return "Impossível determinar solução!\n";
+    return "Impossível determinar solução! Experimente aumentar o valor de widhtsearchmaxnodes do arquivo constants.hpp. Lembre-se de recompilar o algorítmo!\n";
 }
 
 string SliderGraph::pathToRoot()
@@ -207,7 +207,7 @@ string SliderGraph::depthSearch()
 
     depthSearchRecursive(&bestSolution, 0, 9999999);
 
-    if(bestSolution==NULL) return "Impossível determinar solução!\n";
+    if(bestSolution==NULL) return "Impossível determinar solução! Experimente aumentar o valor de dephtsearchmaxrecursion do arquivo constants.hpp (maximo=30). Lembre-se de recompilar o algorítmo!\n";
     
     return bestSolution->pathToRoot();
 }
